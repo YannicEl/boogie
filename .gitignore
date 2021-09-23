@@ -48,3 +48,6 @@ Thumbs.db
 
 # Firebase
 .firebase/
+
+# Config
+**/config.ts
