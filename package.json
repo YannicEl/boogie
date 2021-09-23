@@ -1,0 +1,33 @@
+{
+	"name": "boogie",
+	"version": "1.0.0",
+	"description": "",
+	"main": ".dist/main.js",
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"watch": "tsc --watch",
+		"start": "node ./dist/main.js",
+		"deploy-command": "node ./dist/deploy-commands.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/YannicEl/boogie.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/YannicEl/boogie/issues"
+	},
+	"homepage": "https://github.com/YannicEl/boogie#readme",
+	"dependencies": {
+		"@discordjs/builders": "^0.6.0",
+		"@discordjs/rest": "^0.1.0-canary.0",
+		"discord-api-types": "^0.23.1",
+		"discord.js": "^13.1.0"
+	},
+	"devDependencies": {
+		"typescript": "^4.4.3"
+	}
+}

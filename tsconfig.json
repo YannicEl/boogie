@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"lib": ["es2021"],
+		"module": "ESNext",
+		"target": "es2021",
+
+		"strict": true,
+		"esModuleInterop": true,
+		"moduleResolution": "Node",
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+
+		"declaration": true,
+		"outDir": "./dist"
+	},
+	"compileOnSave": true,
+	"include": ["src"]
+}
