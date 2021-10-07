@@ -1,7 +1,8 @@
 // Require the necessary discord.js classes
 import { Client, Intents } from 'discord.js';
+import { createAudioPlayer, createAudioResource , StreamType, demuxProbe, joinVoiceChannel, NoSubscriberBehavior, AudioPlayerStatus, VoiceConnectionStatus, getVoiceConnection } from '@discordjs/voice';
 import { token } from '../config';
-import {validate} from "play-dl";
+import {stream, validate} from "play-dl";
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -76,11 +77,25 @@ client.on("messageCreate", async function (message) {
 
 		console.log("its a yt vid");
 
-		/*const connection = joinVoiceChannel({
-			channelId : message.member.voice.channel.id,
-			guildId : message.guild.id,
-			adapterCreator: message.guild.voiceAdapterCreator
-		})*/
+		const connection = joinVoiceChannel({
+			channelId : message.member?.voice.channel?.id,
+			guildId : message.guild?.id,
+			adapterCreator: message.guild?.voiceAdapterCreator
+		});
+
+		let ytStream = await stream(youtubeUrl);
+
+		let resource = createAudioResource(ytStream.stream, {
+			inputType : ytStream.type
+		})
+		let player = createAudioPlayer({
+			behaviors: {
+				noSubscriber: NoSubscriberBehavior.Play
+			}
+		})
+
+		player.play(resource)
+		connection.subscribe(player)
 	}
 
 });
