@@ -13,7 +13,7 @@ import {
 	AudioPlayer
 } from '@discordjs/voice';
 import { token } from '../config';
-import {stream, validate} from "play-dl";
+import {playlist_info, stream, validate} from "play-dl";
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
@@ -24,7 +24,7 @@ const commandPrefix = '-';
 let player: AudioPlayer;
 
 // youtube queue
-let playQueue;
+let playQueue = [];
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
@@ -33,7 +33,7 @@ client.once('ready', () => {
 
 client.on("messageCreate", async function (message) {
 	console.log("new message received");
-	console.log("timestamp: ", +Date.now());
+	console.log("timestamp: ", Date.now());
 	console.log("author: ", message.author);
 	console.log("content: ", message.content);
 
@@ -51,9 +51,9 @@ client.on("messageCreate", async function (message) {
 	}
 
 	if (command === 'play') {
-		if (!message.member?.voice.channel) {
+		/*if (!message.member?.voice.channel) {
 			await message.reply("Connect to a Voice Channel du huso");
-		}
+		}*/
 
 		if (!args[0]) return;
 
@@ -68,7 +68,14 @@ client.on("messageCreate", async function (message) {
 		}
 
 		if (check === "yt_playlist") {
+			let playlist = await playlist_info(youtubeUrl);
+			// playlist = await playlist.fetch();
+			// console.log(playlist);
 
+			let x = await playlist.next(5);
+			console.log(x);
+
+			// playlist = playlist.map(e => e.url);
 		}
 
 		console.log("its a yt vid");
